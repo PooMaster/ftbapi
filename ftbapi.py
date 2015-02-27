@@ -4,11 +4,13 @@ import xml.etree.ElementTree as ET
 
 BASE_URL = 'http://www.creeperrepo.net/FTB2/'
 STATIC_URL = BASE_URL + 'static/'
-MOD_LIST_URL = STATIC_URL + 'modpacks.xml'
+MODPACK_URL = STATIC_URL + 'modpacks.xml'
 THIRD_PARTY_URL = STATIC_URL + 'thirdparty.xml'
+#MAPS_URL = STATIC_URL + 'maps.xml'
+#TEXTUREPACK_URL = STATIC_URL + 'texturepack.xml'
 
 def get_modpacks():
-    return _make_modpacks(MOD_LIST_URL)
+    return _make_modpacks(MODPACK_URL)
 
 def get_third_party_modpacks():
     return _make_modpacks(THIRD_PARTY_URL)
