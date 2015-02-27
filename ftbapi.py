@@ -37,6 +37,8 @@ class FTBModPack:
                         attrs['repoVersion'],
                         attrs['serverPack'])
         self.server_url = BASE_URL + '%5E'.join(server_parts)
+
+        self.mods = [mod.strip() for mod in attrs['mods'].split(';') if mod]
         
         self.icon_url = STATIC_URL + attrs['logo']
         self.splash_url = STATIC_URL + attrs['image']
