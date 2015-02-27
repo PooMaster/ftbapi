@@ -19,7 +19,7 @@ def _make_modpacks(modpack_xml):
         raise Exception("Bad response: {} {}".format(r.status_code, r.reason))
 
     root = ET.fromstring(r.text)
-    return [FTBModPack(elem) for elem in root]
+    return [FTBModPack(elem) for elem in root if elem.attrib['serverPack']]
 
 class FTBModPack:
     def __init__(self, element):
@@ -46,7 +46,7 @@ class FTBModPack:
         self.dir = attrs['dir']
 
 if __name__ == '__main__':
-    for modpack in get_third_party_modpacks():
+    for modpack in get_modpacks():
         print("{} v{} for Minecraft {}".format(modpack.name, modpack.version, 
                                                modpack.minecraft_version))
         print(modpack.description)
