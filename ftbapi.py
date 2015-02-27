@@ -5,9 +5,16 @@ import xml.etree.ElementTree as ET
 BASE_URL = 'http://www.creeperrepo.net/FTB2/'
 STATIC_URL = BASE_URL + 'static/'
 MOD_LIST_URL = STATIC_URL + 'modpacks.xml'
+THIRD_PARTY_URL = STATIC_URL + 'thirdparty.xml'
 
 def get_modpacks():
-    r = requests.get(MOD_LIST_URL)
+    return _make_modpacks(MOD_LIST_URL)
+
+def get_third_party_modpacks():
+    return _make_modpacks(THIRD_PARTY_URL)
+
+def _make_modpacks(modpack_xml):
+    r = requests.get(modpack_xml)
     if r.status_code != 200:
         raise Exception("Bad response: {} {}".format(r.status_code, r.reason))
 
@@ -39,7 +46,7 @@ class FTBModPack:
         self.dir = attrs['dir']
 
 if __name__ == '__main__':
-    for modpack in get_modpacks():
+    for modpack in get_third_party_modpacks():
         print("{} v{} for Minecraft {}".format(modpack.name, modpack.version, 
                                                modpack.minecraft_version))
         print(modpack.description)
