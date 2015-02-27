@@ -21,6 +21,7 @@ class FTBModPack:
         self.version = attrs['version']
         self.old_versions = attrs['oldVersions'].split(';')
         self.minecraft_version = attrs['mcVersion']
+        self.description = attrs['description']
 
         server_parts = ('modpacks',
                         attrs['dir'],
@@ -34,7 +35,6 @@ class FTBModPack:
             self.panel_url = STATIC_URL + attrs['squareImage']
         else:
             self.panel_url = None
-        self.description = attrs['description']
         
         self.dir = attrs['dir']
 
@@ -45,4 +45,3 @@ if __name__ == '__main__':
         print(modpack.description)
         print(modpack.server_url)
         print()
-
