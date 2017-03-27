@@ -8,14 +8,16 @@ THIRD_PARTY_URL = STATIC_URL + 'thirdparty.xml'
 #MAPS_URL = STATIC_URL + 'maps.xml'
 #TEXTUREPACK_URL = STATIC_URL + 'texturepack.xml'
 
-def get_modpacks():
-    return _make_modpacks(MODPACK_URL)
+def get_modpacks(session=None):
+    return _make_modpacks(MODPACK_URL, session=session)
 
-def get_third_party_modpacks():
-    return _make_modpacks(THIRD_PARTY_URL)
+def get_third_party_modpacks(session=None):
+    return _make_modpacks(THIRD_PARTY_URL, session=session)
 
-def _make_modpacks(modpack_xml):
-    r = requests.get(modpack_xml)
+def _make_modpacks(modpack_xml, session=None):
+    if session is None:
+        session = requests.Session()
+    r = session.get(modpack_xml)
     if r.status_code != 200:
         raise Exception("Bad response: {} {}".format(r.status_code, r.reason))
 
